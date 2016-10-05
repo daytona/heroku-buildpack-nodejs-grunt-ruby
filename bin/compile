@@ -159,6 +159,14 @@ echo "export PATH=\"\$HOME/vendor/node/bin:\$HOME/bin:\$HOME/node_modules/.bin:\
   fi
 )
 
+# Test to see if rake is available, if so, run precompile
+RAKE=`which rake`
+if [ -n "${RAKE}" ]; then
+	echo "-----> Found Rake, running rake assets:precompile task"
+  ${RAKE} assets:precompile
+fi
+
+
 # Post package.json to nomnom service
 # Use a subshell so failures won't break the build.
 (
